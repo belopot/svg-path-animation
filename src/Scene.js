@@ -36,7 +36,7 @@ export default class Scene {
 
         //Load svg
         this.svgLoader = new SVGLoader();
-        this.svgLoader.load('svg/drawing.svg', function (data) {
+        this.svgLoader.load('svg/shape0.svg', function (data) {
 
             var paths = data.paths;
             var group = new THREE.Group();
@@ -103,19 +103,33 @@ export default class Scene {
                     }
 
                 }
-
-                var box = new THREE.BoxHelper(group, 0xffff00);
-                self.scene.add(box);
-
-
-                self.scene.add(group);
-
             }
+
+
+            group.scale.y = -1;
+
+            var bbox = new THREE.Box3().setFromObject(group);
+
+            var center = new THREE.Vector3((bbox.max.x - bbox.min.x) / 2, (bbox.max.y - bbox.min.y) / 2, (bbox.max.z - bbox.min.z) / 2);
+
+            if (center.x === Infinity || center.y === Infinity || center.z === Infinity) {
+                center = new THREE.Vector3(0, 0, 0);
+            }
+
+            group.position.set(-center.x, center.y, -center.z);
+
+            
+
+            var pivot = new THREE.Group();
+            pivot.add(group);
+
+            self.scene.add(pivot);
+
         })
 
 
         window.addEventListener('resize', ev => {
-            this.onResize(ev)
+            this.onResize()
         }, false);
 
 
@@ -133,10 +147,10 @@ export default class Scene {
         this.renderer.render(this.scene, this.camera)
     }
 
-    onResize(event) {
+    onResize() {
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.camera.aspect = window.innerWidth / window.innerHeight;
         this.camera.updateMatrixWorld();
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
 
