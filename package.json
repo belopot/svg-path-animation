@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "author": "belopot",
-  "main": "index.html",
-  "private": true,
+  "private": false,
+  "homepage": "https://belopot.github.io/svg-path-animation/",
   "scripts": {
     "start": "parcel index.html --open",
     "build": "parcel build index.html",
