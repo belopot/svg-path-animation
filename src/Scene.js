@@ -39,7 +39,7 @@ export default class Scene {
 
         //Load svg
         this.svgLoader = new SVGLoader();
-        this.svgLoader.load('svg/shape1.svg', function (data) {
+        this.svgLoader.load('svg/tiger.svg', function (data) {
 
             var paths = data.paths;
             var group = new THREE.Group();
@@ -188,7 +188,7 @@ export default class Scene {
             };
 
             // Decrement the dashOffset value to animate the path with the dash.
-            material.uniforms.dashOffset.value -= 0.002;
+            material.uniforms.dashOffset.value -= 0.0005;
         }
 
     }
