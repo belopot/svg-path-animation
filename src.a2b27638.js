@@ -38150,13 +38150,13 @@ MeshLine.prototype.process = function() {
 		this.attributes.index.needsUpdate = true;
 	}
 
-	this.geometry.setAttribute( 'position', this.attributes.position );
-	this.geometry.setAttribute( 'previous', this.attributes.previous );
-	this.geometry.setAttribute( 'next', this.attributes.next );
-	this.geometry.setAttribute( 'side', this.attributes.side );
-	this.geometry.setAttribute( 'width', this.attributes.width );
-	this.geometry.setAttribute( 'uv', this.attributes.uv );
-	this.geometry.setAttribute( 'counters', this.attributes.counters );
+	this.geometry.addAttribute( 'position', this.attributes.position );
+	this.geometry.addAttribute( 'previous', this.attributes.previous );
+	this.geometry.addAttribute( 'next', this.attributes.next );
+	this.geometry.addAttribute( 'side', this.attributes.side );
+	this.geometry.addAttribute( 'width', this.attributes.width );
+	this.geometry.addAttribute( 'uv', this.attributes.uv );
+	this.geometry.addAttribute( 'counters', this.attributes.counters );
 
 	this.geometry.setIndex( this.attributes.index );
 
@@ -38682,7 +38682,7 @@ function () {
             depthWrite: false,
             depthTest: false,
             transparent: true,
-            dashArray: 1,
+            dashArray: 0,
             dashOffset: 0.5,
             dashRatio: 0.65,
             side: THREE.DoubleSide,
@@ -38812,7 +38812,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "13955" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "14594" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
