@@ -1,5 +1,6 @@
 # svg-path-animation
- 
+
+![1](https://github.com/belopot/svg-path-animation/blob/master/screenshots/0.gif) 
 ![1](https://github.com/belopot/svg-path-animation/blob/master/screenshots/1.JPG)
 ![2](https://github.com/belopot/svg-path-animation/blob/master/screenshots/2.JPG)
 
