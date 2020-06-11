@@ -5,7 +5,7 @@
 ![2](https://github.com/belopot/svg-path-animation/blob/master/screenshots/2.JPG)
 
 ## View the project
-https://belopot.github.io/svg-path-animation/
+https://belopot.github.io/svg-path-animation/dist/
  
 
 ## Available Scripts
