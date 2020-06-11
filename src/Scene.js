@@ -12,7 +12,7 @@ export default class Scene {
         this.container = document.getElementById('stage')
 
         this.scene = new THREE.Scene()
-        this.scene.background = new THREE.Color(0xeeeeee);
+        this.scene.background = new THREE.Color(0x231e3f);
 
         this.renderer = new THREE.WebGLRenderer({
             canvas: this.container,
@@ -29,7 +29,7 @@ export default class Scene {
 
 
         this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 10000);
-        this.camera.position.set(0, 0, 500);
+        this.camera.position.set(0, 0, 1000);
 
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.controls.screenSpacePanning = true;
@@ -39,7 +39,7 @@ export default class Scene {
 
         //Load svg
         this.svgLoader = new SVGLoader();
-        this.svgLoader.load('svg/tiger.svg', function (data) {
+        this.svgLoader.load('https://simplemaps.com/static/demos/resources/svg-library/svgs/world.svg', function (data) {
 
             var paths = data.paths;
             var group = new THREE.Group();
@@ -63,21 +63,21 @@ export default class Scene {
                     // });
 
                     var material = new MeshLineMaterial({
-                        map: new THREE.TextureLoader().load('textures/stroke.png'),
-                        useMap: true,
+                        // map: new THREE.TextureLoader().load('textures/stroke.png'),
+                        useMap: false,
                         color: new THREE.Color().setStyle(fillColor),
                         opacity: path.userData.style.fillOpacity,
                         resolution: new THREE.Vector2(window.innerWidth, window.innerHeight),
                         sizeAttenuation: false,
-                        lineWidth: 10,
+                        lineWidth: 2,
                         near: self.camera.near,
                         far: self.camera.far,
                         depthWrite: false,
                         depthTest: false,
                         transparent: true,
                         dashArray: 1,
-                        dashOffset: 0.5,
-                        dashRatio: 0.65,
+                        dashOffset: 0,
+                        dashRatio: 0.0,
                         side: THREE.DoubleSide,
                         wireframe: false
                     });
@@ -166,6 +166,8 @@ export default class Scene {
 
         this.update();
 
+
+        this.delta = -0.005;
     }
 
 
@@ -183,12 +185,16 @@ export default class Scene {
         for (var i = 0; i < this.meshlineMaterials.length; i++) {
             var material = this.meshlineMaterials[i];
             // Check if the dash is out to stop animate it.
-            if (material.uniforms.dashOffset.value < -2) {
-                material.uniforms.dashOffset.value = 0;
-            };
+            if (material.uniforms.dashRatio.value > 1) {
+                this.delta = -0.005;
+            }
 
-            // Decrement the dashOffset value to animate the path with the dash.
-            material.uniforms.dashOffset.value -= 0.0005;
+            if (material.uniforms.dashRatio.value < 0) {
+                this.delta = 0.005;
+            }
+
+            material.uniforms.dashRatio.value += this.delta;
+
         }
 
     }
